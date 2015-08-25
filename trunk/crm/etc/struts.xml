@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+
+	
+
+	
+	<package name="basePackage" abstract="true" extends="struts-default">
+		<interceptors>
+			<interceptor name="validateLogin" class="com.crm.action.interceptor.LoginValidateInterceptor">
+				<param name="goName">index,login,tosign,sign,active,checkemail,sign-success,reemail</param>
+			</interceptor>
+			<interceptor-stack name="myInterceptor">
+				<interceptor-ref name="validateLogin"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myInterceptor"/>
+		
+		<global-results>
+			<result name="index" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">index</param>
+			</result>
+		</global-results>
+	</package>
+
+	<include file="struts-dashboard.xml"/>
+	<include file="struts-contact.xml"/>
+	<include file="struts-chances.xml"/>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<package name="userPackage" extends="basePackage">
+		<action name="index" class="userAction">
+			<result>/WEB-INF/views/index.jsp</result>
+		</action>
+		<action name="tosign" class="userAction" method="tosign">
+			<result>/WEB-INF/views/sign.jsp</result>
+			
+		</action>
+		
+		<action name="sign" class="userAction" method="sign">
+			<result type="redirectAction">
+				<param name="actionName">sign-success</param>
+				<param name="email">${user.email}</param>
+				
+			</result>
+		</action>
+		<action name="sign-success" class="userAction" method="signsuccess">
+			<result>/WEB-INF/views/sign-success.jsp</result>
+		</action>
+		
+		
+		<action name="checkemail" class="userAction" method="checkemail">
+		</action>
+		
+		<action name="active" class="userAction" method="active">
+			<result>/WEB-INF/views/active-success.jsp</result>
+		</action>
+		
+		<action name="login" class="userAction" method="login">
+		</action>
+		
+		<action name="profile" class="userAction" method="profile">
+			<result>/WEB-INF/views/profiles.jsp</result>
+		</action>
+		<action name="editname" class="userAction" method="editname">
+			
+		</action>
+		<action name="editpwd" class="userAction" method="editpwd">
+			
+		</action>
+		
+		<action name="loadhead" class="userAction" method="loadhead">
+			<result name="error" type="redirectAction">
+				<param name="actionName">profile</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">profile</param>
+			</result>
+		</action>
+		
+		<action name="downhead" class="userAction" method="downhead">
+			<result name="success" type="stream">
+				<!-- 下载文件的mime类型 -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 下载文件的描述 -->
+				<param name="contentDisposition">attachment;filename="${user.face}"</param>
+				<!-- 缓冲区大小 -->
+				<param name="bufferSize">1024</param>
+				<!-- 获取文件的流getxxx方法的名字(不包含get) -->
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<action name="exit" class="userAction" method="exit">
+			<result type="redirectAction">
+				<param name="actionName">index</param>
+			</result>
+		</action>
+		
+		<action name="reemail" class="userAction" method="reemail">
+			<result type="redirectAction">
+				<param name="actionName">sign-success</param>
+				<param name="email">${user.email}</param>
+			</result>
+		</action>
+	</package>
+</struts>

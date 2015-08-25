@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.crm.pojo">
+	<class name="Book" table="t_book">
+		<id name="id">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="name"/>
+		<property name="position"/>
+		<property name="descr"/>
+		<property name="weibo"/>
+		<property name="view"/>
+		<property name="company"/>
+		<property name="img"/>
+		<property name="co"/>
+		<many-to-one name="org" column="orgid" class="Org"/>
+		<set name="emailSet" inverse="true">
+			<key column="bookid"></key>
+			<one-to-many class="Email"/>
+		</set>
+		<set name="imSet" inverse="true">
+			<key column="bookid"></key>
+			<one-to-many class="Im"/>
+		</set>
+		<set name="phoneSet" inverse="true">
+			<key column="bookid"></key>
+			<one-to-many class="Phone"/>
+		</set>
+		<set name="addressSet" inverse="true">
+			<key column="bookid"></key>
+			<one-to-many class="Address"/>
+		</set>
+		<set name="sitesSet" inverse="true">
+			<key column="bookid"></key>
+			<one-to-many class="Sites"/>
+		</set>
+		<set name="chanceSet" inverse="true">
+			<key column="bookid"></key>
+			<one-to-many class="Chance"/>
+		</set>
+	</class>
+</hibernate-mapping>

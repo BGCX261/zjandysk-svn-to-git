@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.crm.pojo">
+<class name="Address" table="t_address">
+	<id name="id">
+		<generator class="assigned"></generator>
+	</id>
+	<property name="type"/>
+	<property name="address"/>
+	
+	<many-to-one name="book" column="bookid" class="Book"/>
+</class>
+</hibernate-mapping>

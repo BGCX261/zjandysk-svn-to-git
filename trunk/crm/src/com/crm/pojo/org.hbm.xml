@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.crm.pojo">
+	<class name="Org" table="t_org">
+		<id name="id">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="role"></property>
+		<many-to-one name="user" column="userid" class="User"/>
+		<many-to-one name="orgName" column="orgnameid" class="OrgName"/>
+		<set name="bookSet" inverse="true">
+			<key column="orgid"></key>
+			<one-to-many class="Book"/>
+		</set>
+		<set name="chanceDoSet" inverse="true">
+			<key column="doid"/>
+			<one-to-many class="Chance"/>
+		</set>
+		<set name="chanceCreateSet" inverse="true">
+			<key column="createid"/>
+			<one-to-many class="Chance"/>
+		</set>
+	</class>
+</hibernate-mapping>

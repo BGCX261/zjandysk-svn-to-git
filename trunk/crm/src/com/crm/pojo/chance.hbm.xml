@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.crm.pojo">
+	<class name="Chance" table="t_chance">
+		<id name="id">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="desc"/>
+		<property name="money"/>
+		<property name="view"/>
+		<property name="state"/>
+		<property name="name"/>
+		<one-to-one name="chanceType" class="ChanceType"/>
+		<many-to-one name="book" class="Book" column="bookId"/>
+		<many-to-one name="doOrg" class="Org" column="doid"/>
+		<many-to-one name="createOrg" class="Org" column="createid"/>
+	</class>
+</hibernate-mapping>    

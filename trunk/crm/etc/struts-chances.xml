@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="chancePackage" extends="struts-default" namespace="/chances">
+		<action name="main" class="com.crm.action.ChanceAction">
+			<result name="success">/WEB-INF/views/chanceMain.jsp</result>
+		</action>
+		<action name="createChance" class="com.crm.action.ChanceAction" method="twoExecute">
+			<result name="success">/WEB-INF/views/addChance.jsp</result>
+		</action>
+	
+	</package>
+</struts>	
